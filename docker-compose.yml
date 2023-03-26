@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  localstack: 
+    image: localstack/localstack:latest
+    environment: 
+      - DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4566
+      - SERVICES=sqs,lambda,logs,s3
+      - DATA_DIR=/tmp/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - ./localstack/data:/tmp/localstack/data
+    ports: 
+      - '4566-4583:4566-4583'
